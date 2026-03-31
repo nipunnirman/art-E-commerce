@@ -1,4 +1,4 @@
-import { ArrowRight, Sparkles, ChevronDown } from 'lucide-react';
+import { ArrowRight, Sparkles } from 'lucide-react';
 import React, { useState, useEffect } from 'react';
 import heroImgMain from '../assets/home/img3.jpg';
 import heroImgSec1 from '../assets/home/sell1.JPG';
@@ -6,8 +6,9 @@ import heroImgSec2 from '../assets/home/IMG_4285.JPG';
 
 const AnimatedNumber = ({ value }) => {
   const [count, setCount] = useState(0);
-  const numericValue = parseInt(value.replace(/[^0-9]/g, ''), 10);
-  const suffix = value.replace(/[0-9]/g, '');
+  const strValue = String(value);
+  const numericValue = parseInt(strValue.replace(/[^0-9]/g, ''), 10);
+  const suffix = strValue.replace(/[0-9]/g, '');
 
   useEffect(() => {
     let start = 0;
@@ -210,9 +211,9 @@ const Hero = () => {
           {/* Stats — horizontal scroll cards */}
           <div style={{ display: 'flex', gap: '10px' }}>
             {[
-              { value: '50+', label: 'Artworks', icon:  },
-              { value: '100%', label: 'Authentic', icon:  },
-              { value: '2K+', label: 'Collectors', icon:  },
+              { value: '50+', label: 'Artworks', },
+              { value: '100%', label: 'Authentic', },
+              { value: '2K+', label: 'Collectors', },
             ].map((stat, i) => (
               <div key={i} style={{
                 flex: 1,
@@ -224,7 +225,7 @@ const Hero = () => {
                 textAlign: 'center',
                 boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.08)',
               }}>
-                <div style={{ fontSize: '18px', marginBottom: '4px' }}>{stat.icon}</div>
+                {stat.icon && <div style={{ fontSize: '18px', marginBottom: '4px' }}>{stat.icon}</div>}
                 <div style={{
                   fontFamily: "'Sora',sans-serif", fontSize: '22px', fontWeight: '800',
                   background: 'linear-gradient(135deg,#93C5FD,#60A5FA)',
