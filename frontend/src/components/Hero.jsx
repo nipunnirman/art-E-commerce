@@ -1,5 +1,8 @@
 import { ArrowRight, MessageCircle, Sparkles } from 'lucide-react';
 import React from 'react';
+import heroImgMain from '../assets/home/img3.jpg';
+import heroImgSec1 from '../assets/home/sell1.JPG';
+import heroImgSec2 from '../assets/home/IMG_4285.JPG';
 
 const Hero = () => {
   return (
@@ -142,7 +145,7 @@ const Hero = () => {
           >
             <div style={{
               gridRow: 'span 2', borderRadius: '24px', minHeight: '440px',
-              backgroundImage: 'url("/home/img3.jpg")',
+              backgroundImage: `url(${heroImgMain})`,
               backgroundSize: 'cover', backgroundPosition: 'center',
               boxShadow: '0 24px 48px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.08)',
               position: 'relative', overflow: 'hidden',
@@ -155,12 +158,12 @@ const Hero = () => {
             </div>
             <div style={{ display: 'grid', gap: '14px' }}>
               {[
-                '/home/sell1.JPG',
-                '/home/img3.jpg',
+                heroImgSec1,
+                heroImgSec2,
               ].map((url, i) => (
                 <div key={i} style={{
                   borderRadius: '20px', minHeight: '212px',
-                  backgroundImage: `url("${url}")`,
+                  backgroundImage: `url(${url})`,
                   backgroundSize: 'cover', backgroundPosition: 'center',
                   boxShadow: '0 12px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.07)',
                   position: 'relative', overflow: 'hidden',
