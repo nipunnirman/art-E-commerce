@@ -183,11 +183,11 @@ const AdminDashboard = () => {
             </div>
 
             {/* Product Table */}
-            <div style={{ backgroundColor: 'white', borderRadius: '16px', border: '1px solid var(--border-color)', overflow: 'hidden', boxShadow: '0 4px 6px rgba(0,0,0,0.02)' }}>
+            <div style={{ backgroundColor: 'rgba(255,255,255,0.02)', borderRadius: '16px', border: '1px solid var(--border-color)', overflow: 'hidden', boxShadow: '0 4px 6px rgba(0,0,0,0.02)' }}>
                 <div style={{ overflowX: 'auto' }}>
                     <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
                         <thead>
-                            <tr style={{ backgroundColor: 'var(--bg-pink-light)', color: 'var(--primary)' }}>
+                            <tr style={{ backgroundColor: 'rgba(255,255,255,0.04)', color: 'var(--primary)' }}>
                                 <th style={{ padding: '16px', fontWeight: '600', fontSize: '14px' }}>Artwork</th>
                                 <th style={{ padding: '16px', fontWeight: '600', fontSize: '14px' }}>Title</th>
                                 <th style={{ padding: '16px', fontWeight: '600', fontSize: '14px' }}>Category</th>
@@ -277,7 +277,7 @@ const AdminDashboard = () => {
             )}
 
             <style>{`
-                .admin-row:hover { background-color: #FAFAFB; }
+                .admin-row:hover { background-color: rgba(255,255,255,0.04); }
             `}</style>
         </div>
     );
