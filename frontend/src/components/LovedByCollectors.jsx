@@ -36,7 +36,7 @@ const LovedByCollectors = () => {
           See what our community has to say
         </p>
 
-        <div className="grid-responsive grid-cols-3 md-flex-col" style={{ alignItems: 'stretch' }}>
+        <div className="grid-responsive grid-cols-3" style={{ alignItems: 'stretch', gap: '16px' }}>
           {testimonials.map((t, i) => (
             <div key={i} style={{
               background: 'rgba(255,255,255,0.05)',

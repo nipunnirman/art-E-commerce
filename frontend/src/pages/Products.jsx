@@ -36,10 +36,10 @@ const Products = () => {
 
     return (
         <div className="container section-padding">
-            <h1 className="heading-hero" style={{ marginBottom: '16px' }}>All Products</h1>
-            <p style={{ color: 'var(--text-muted)', marginBottom: '48px', fontSize: '18px' }}>Browse through my complete collection of original artworks.</p>
+            <h1 className="heading-hero" style={{ marginBottom: '12px', fontSize: 'clamp(28px, 6vw, 64px)' }}>All Products</h1>
+            <p style={{ color: 'var(--text-muted)', marginBottom: '36px', fontSize: 'clamp(15px, 2.5vw, 18px)' }}>Browse through my complete collection of original artworks.</p>
 
-            <div className="grid-responsive grid-cols-4">
+            <div className="grid-responsive grid-cols-4" style={{ gap: '14px' }}>
                 {loading && <p style={{ color: 'var(--text-muted)' }}>Loading artworks...</p>}
                 {!loading && products.length === 0 && (
                     <p style={{ color: 'var(--text-muted)' }}>No artworks found. Check back later!</p>

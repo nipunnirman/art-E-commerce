@@ -39,15 +39,15 @@ const Hero = () => {
         }} />
       ))}
 
-      <div className="container flex md-flex-col items-center justify-between gap-8 section-padding" style={{ zIndex: 1 }}>
+      <div className="container flex md-flex-col items-center justify-between gap-8 section-padding hero-section-inner" style={{ zIndex: 1 }}>
         {/* Left content */}
-        <div className="md-w-full" style={{ maxWidth: '560px', width: '100%', zIndex: 1 }}>
-          <div className="badge-pill" style={{ marginBottom: '28px' }}>
+        <div className="md-w-full hero-content" style={{ maxWidth: '560px', width: '100%', zIndex: 1 }}>
+          <div className="badge-pill" style={{ marginBottom: '24px' }}>
             <Sparkles size={14} />
             Exclusive Solo Artist Portfolio
           </div>
 
-          <h1 className="heading-hero" style={{ marginBottom: '28px' }}>
+          <h1 className="heading-hero" style={{ marginBottom: '20px' }}>
             Art That Speaks{' '}
             <br className="md-hide" />
             <span style={{
@@ -72,18 +72,18 @@ const Hero = () => {
           </h1>
 
           <p style={{
-            fontSize: '17px', color: 'rgba(255,255,255,0.58)',
-            marginBottom: '44px', lineHeight: '1.75', fontWeight: '400',
+            fontSize: '16px', color: 'rgba(255,255,255,0.58)',
+            marginBottom: '36px', lineHeight: '1.75', fontWeight: '400',
           }}>
             Every stroke tells a story. Discover unique original artworks that transform spaces, provoke thought, and touch hearts.
           </p>
 
-          <div className="flex sm-flex-col items-center gap-4" style={{ marginBottom: '56px' }}>
-            <button className="btn btn-primary flex items-center justify-center gap-2 sm-w-full" style={{ padding: '16px 32px', fontSize: '15px' }}>
+          <div className="flex sm-flex-col items-center gap-4 hero-buttons" style={{ marginBottom: '40px' }}>
+            <button className="btn btn-primary flex items-center justify-center gap-2 sm-w-full" style={{ padding: '14px 28px', fontSize: '15px' }}>
               Explore Collection
               <ArrowRight size={18} />
             </button>
-            <button className="btn btn-outline sm-w-full" style={{ padding: '16px 32px', fontSize: '15px' }}>
+            <button className="btn btn-outline sm-w-full" style={{ padding: '14px 28px', fontSize: '15px' }}>
               Learn My Story
             </button>
           </div>
@@ -91,14 +91,16 @@ const Hero = () => {
           {/* Stats */}
           <div style={{
             display: 'flex', alignItems: 'center', gap: '0',
-            padding: '24px 28px',
+            padding: '20px 24px',
             background: 'rgba(255,255,255,0.04)',
             backdropFilter: 'blur(24px)',
             WebkitBackdropFilter: 'blur(24px)',
             border: '1px solid rgba(147,197,253,0.14)',
             borderRadius: '20px',
             boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.08)',
-          }} className="sm-flex-col sm-items-start">
+            flexWrap: 'wrap',
+            rowGap: '16px',
+          }}>
             {[
               { value: '50+', label: 'Original\nArtworks' },
               { value: '100%', label: 'Authentic\nOriginals' },
@@ -107,16 +109,18 @@ const Hero = () => {
               <React.Fragment key={i}>
                 {i > 0 && (
                   <div className="md-hide" style={{
-                    width: '1px', height: '40px', margin: '0 28px',
+                    width: '1px', height: '40px', margin: '0 24px',
                     background: 'linear-gradient(180deg, transparent, rgba(147,197,253,0.3), transparent)',
+                    flexShrink: 0,
                   }} />
                 )}
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-3" style={{ flex: '1 1 auto', minWidth: '80px' }}>
                   <div style={{
                     fontFamily: "'Sora', sans-serif",
-                    fontSize: '30px', fontWeight: '800',
+                    fontSize: 'clamp(22px, 4vw, 30px)', fontWeight: '800',
                     background: 'linear-gradient(135deg, #93C5FD, #60A5FA)',
                     WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
+                    flexShrink: 0,
                   }}>{stat.value}</div>
                   <div style={{ color: 'rgba(255,255,255,0.48)', fontSize: '13px', fontWeight: '500', lineHeight: 1.3, whiteSpace: 'pre-line' }}>{stat.label}</div>
                 </div>
@@ -126,7 +130,7 @@ const Hero = () => {
         </div>
 
         {/* Right images */}
-        <div className="md-w-full" style={{ width: '46%', position: 'relative', zIndex: 1 }}>
+        <div className="md-w-full hero-images" style={{ width: '46%', position: 'relative', zIndex: 1 }}>
           {/* Glow behind images */}
           <div style={{
             position: 'absolute', inset: '-20px',
@@ -192,9 +196,17 @@ const Hero = () => {
         }
         @media (max-width: 768px) {
           .hero-grid { transform: rotate(0deg) !important; grid-template-columns: 1fr !important; }
-          .hero-grid > div:first-child { min-height: 280px !important; }
-          .hero-grid > div:nth-child(2) { grid-template-columns: repeat(2, 1fr); }
-          .hero-grid > div:nth-child(2) > div { min-height: 140px !important; }
+          .hero-grid > div:first-child { min-height: 260px !important; grid-row: unset !important; }
+          .hero-grid > div:nth-child(2) { display: grid; grid-template-columns: repeat(2, 1fr); }
+          .hero-grid > div:nth-child(2) > div { min-height: 130px !important; }
+          .hero-section-inner { flex-direction: column !important; gap: 32px !important; }
+          .hero-content { max-width: 100% !important; }
+          .hero-images { width: 100% !important; }
+          .hero-buttons { margin-bottom: 32px !important; }
+        }
+        @media (max-width: 500px) {
+          .hero-grid > div:nth-child(2) { grid-template-columns: 1fr; }
+          .hero-grid > div:nth-child(2) > div { min-height: 160px !important; }
         }
       `}</style>
     </section>

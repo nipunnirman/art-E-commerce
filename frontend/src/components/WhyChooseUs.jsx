@@ -42,10 +42,10 @@ const WhyChooseUs = () => {
         We're committed to bringing you exceptional art experiences with unmatched service
       </p>
 
-      <div className="grid-responsive grid-cols-3">
+      <div className="grid-responsive grid-cols-3" style={{ gap: '16px' }}>
         {features.map((item, idx) => (
           <div key={idx} className="feature-card" style={{
-            padding: '44px 32px',
+            padding: 'clamp(28px, 4vw, 44px) clamp(20px, 3vw, 32px)',
             background: 'rgba(255,255,255,0.04)',
             backdropFilter: 'blur(24px)',
             WebkitBackdropFilter: 'blur(24px)',

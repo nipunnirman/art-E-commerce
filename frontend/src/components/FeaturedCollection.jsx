@@ -34,7 +34,7 @@ const FeaturedCollection = () => {
 
   return (
     <section className="container section-padding">
-      <div className="flex sm-flex-col sm-items-start items-end justify-between gap-4" style={{ marginBottom: '48px' }}>
+      <div className="flex sm-flex-col sm-items-start items-end justify-between gap-4" style={{ marginBottom: '36px' }}>
         <div>
           <h2 className="heading-section" style={{ marginBottom: '12px' }}>Featured Collection</h2>
           <p style={{ color: 'rgba(255,255,255,0.48)', fontSize: '17px' }}>Handpicked masterpieces for discerning collectors</p>
@@ -44,7 +44,7 @@ const FeaturedCollection = () => {
         </Link>
       </div>
 
-      <div className="grid-responsive grid-cols-4">
+      <div className="grid-responsive grid-cols-4" style={{ gap: '14px' }}>
         {products.map(product => {
           const productId = product._id || product.id;
           const inCart = items.some(i => (i._id || i.id) === productId);

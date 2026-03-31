@@ -57,7 +57,7 @@ const Login = () => {
   };
 
   return (
-    <div className="container flex justify-center items-center" style={{ minHeight: '80vh', padding: '60px 24px' }}>
+    <div className="container flex justify-center items-center" style={{ minHeight: '80vh', padding: '40px 16px' }}>
       {/* Background orb */}
       <div style={{
         position: 'fixed', top: '30%', left: '50%', transform: 'translateX(-50%)',
@@ -68,7 +68,7 @@ const Login = () => {
 
       <div style={{
         width: '100%', maxWidth: '430px',
-        padding: '48px',
+        padding: 'clamp(28px, 5vw, 48px) clamp(20px, 5vw, 48px)',
         background: 'rgba(255,255,255,0.05)',
         backdropFilter: 'blur(32px) saturate(200%)',
         WebkitBackdropFilter: 'blur(32px) saturate(200%)',
@@ -175,7 +175,9 @@ const Login = () => {
 
       <style>{`
         input::placeholder { color: rgba(255,255,255,0.25) !important; }
-        @media (max-width: 600px) { .container > div { padding: 32px 20px !important; } }
+        @media (max-width: 480px) {
+          .container > div[style] { border-radius: 20px !important; }
+        }
       `}</style>
     </div>
   );
