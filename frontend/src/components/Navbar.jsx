@@ -1,4 +1,4 @@
-import { Palette, User, ShoppingCart, Menu, X, LogOut } from 'lucide-react';
+import { Palette, User, ShoppingCart, Menu, X, LogOut, Sparkles } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
@@ -25,80 +25,164 @@ const Navbar = () => {
 
   return (
     <header style={{
-      borderBottom: scrolled ? '1px solid var(--border-color)' : '1px solid transparent',
-      backgroundColor: scrolled ? 'rgba(255, 255, 255, 0.95)' : 'white',
-      backdropFilter: scrolled ? 'blur(10px)' : 'none',
+      background: scrolled
+        ? 'rgba(2, 8, 24, 0.75)'
+        : 'rgba(2, 8, 24, 0.4)',
+      backdropFilter: 'blur(28px) saturate(200%)',
+      WebkitBackdropFilter: 'blur(28px) saturate(200%)',
+      borderBottom: scrolled
+        ? '1px solid rgba(147, 197, 253, 0.18)'
+        : '1px solid rgba(255,255,255,0.06)',
+      boxShadow: scrolled ? '0 8px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.06)' : 'none',
       position: 'sticky',
       top: 0,
       zIndex: 50,
-      transition: 'all 0.3s ease'
+      transition: 'all 0.4s ease',
     }}>
-      <div className="container flex items-center justify-between" style={{ height: '80px' }}>
-        <Link to="/" className="flex items-center gap-2" style={{ fontWeight: '800', fontSize: '20px', letterSpacing: '-0.02em' }}>
-          <Palette color="var(--primary)" size={32} />
+      <div className="container flex items-center justify-between" style={{ height: '76px' }}>
+        {/* Logo */}
+        <Link to="/" className="flex items-center gap-2" style={{
+          fontFamily: "'Sora', sans-serif",
+          fontWeight: '800',
+          fontSize: '19px',
+          letterSpacing: '-0.03em',
+          color: 'rgba(255,255,255,0.95)',
+        }}>
+          <div style={{
+            width: '36px', height: '36px', borderRadius: '10px',
+            background: 'linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            boxShadow: '0 4px 16px rgba(59,130,246,0.45), inset 0 1px 0 rgba(255,255,255,0.25)',
+          }}>
+            <Palette size={20} color="white" />
+          </div>
           <span>Through My Pencil</span>
         </Link>
 
-        {/* Desktop Navigation */}
+        {/* Desktop Nav */}
         <nav className="flex items-center gap-8 md-hide">
-          <Link to="/" style={{ color: 'var(--text-muted)', fontSize: '15px', fontWeight: '500', transition: 'color 0.2s' }} onMouseOver={e => e.target.style.color = 'var(--text-main)'} onMouseOut={e => e.target.style.color = 'var(--text-muted)'}>Home</Link>
-          <Link to="/products" style={{ color: 'var(--text-main)', fontSize: '15px', fontWeight: '600' }}>Products</Link>
+          {['/', '/products'].map((path, i) => (
+            <Link key={i} to={path} style={{
+              color: 'rgba(255,255,255,0.60)',
+              fontSize: '15px', fontWeight: '500',
+              transition: 'color 0.2s', fontFamily: "'Sora', sans-serif",
+            }}
+              onMouseOver={e => e.target.style.color = 'rgba(255,255,255,0.95)'}
+              onMouseOut={e => e.target.style.color = 'rgba(255,255,255,0.60)'}
+            >{i === 0 ? 'Home' : 'Portfolio'}</Link>
+          ))}
 
           {isLoggedIn ? (
             <div className="flex items-center gap-4">
-              <span style={{ fontSize: '14px', color: 'var(--text-muted)', fontWeight: '500' }}>Hi, <strong style={{ color: 'var(--text-main)' }}>{user?.name}</strong></span>
-              <button onClick={handleLogout} className="btn btn-outline btn-sm flex items-center gap-2" style={{ padding: '8px 16px', color: '#EF4444', borderColor: '#FEE2E2' }}>
-                <LogOut size={16} /> Logout
+              <span style={{ fontSize: '14px', color: 'rgba(255,255,255,0.50)', fontWeight: '500' }}>
+                Hi, <strong style={{ color: '#93C5FD' }}>{user?.name}</strong>
+              </span>
+              <button onClick={handleLogout} className="btn btn-outline btn-sm flex items-center gap-2"
+                style={{ color: '#FCA5A5', borderColor: 'rgba(252,165,165,0.25)' }}>
+                <LogOut size={15} /> Logout
               </button>
             </div>
           ) : (
             <Link to="/login" className="btn btn-primary btn-sm flex items-center gap-2" style={{ padding: '10px 20px' }}>
-              <User size={16} /> Login
+              <User size={15} /> Login
             </Link>
           )}
 
-          <button onClick={() => setIsCartOpen(true)} style={{ color: 'var(--text-main)', padding: '8px', borderRadius: '50%', backgroundColor: 'var(--bg-pink-light)', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
-            <ShoppingCart size={20} color="var(--primary)" />
+          <button onClick={() => setIsCartOpen(true)} style={{
+            position: 'relative', padding: '10px', borderRadius: '12px',
+            background: 'rgba(59,130,246,0.12)',
+            border: '1px solid rgba(59,130,246,0.28)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            transition: 'all 0.3s ease',
+            backdropFilter: 'blur(12px)',
+          }}
+            onMouseOver={e => { e.currentTarget.style.background = 'rgba(59,130,246,0.22)'; e.currentTarget.style.boxShadow = '0 0 20px rgba(59,130,246,0.3)'; }}
+            onMouseOut={e => { e.currentTarget.style.background = 'rgba(59,130,246,0.12)'; e.currentTarget.style.boxShadow = 'none'; }}
+          >
+            <ShoppingCart size={20} color="#93C5FD" />
             {cartCount > 0 && (
-              <span style={{ position: 'absolute', top: '-4px', right: '-4px', backgroundColor: 'var(--primary)', color: 'white', fontSize: '11px', fontWeight: '700', width: '20px', height: '20px', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{cartCount}</span>
+              <span style={{
+                position: 'absolute', top: '-6px', right: '-6px',
+                background: 'linear-gradient(135deg, #3B82F6, #1D4ED8)',
+                color: 'white', fontSize: '11px', fontWeight: '700',
+                width: '20px', height: '20px', borderRadius: '10px',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                boxShadow: '0 2px 8px rgba(59,130,246,0.5)',
+              }}>{cartCount}</span>
             )}
           </button>
         </nav>
 
-        {/* Mobile: cart + hamburger */}
-        <div className="flex items-center gap-4 mobile-only-btn">
-          <button onClick={() => setIsCartOpen(true)} style={{ position: 'relative', padding: '8px', borderRadius: '50%', backgroundColor: 'var(--bg-pink-light)' }}>
-            <ShoppingCart size={20} color="var(--primary)" />
+        {/* Mobile */}
+        <div className="flex items-center gap-3 mobile-only-btn">
+          <button onClick={() => setIsCartOpen(true)} style={{
+            position: 'relative', padding: '9px', borderRadius: '11px',
+            background: 'rgba(59,130,246,0.12)', border: '1px solid rgba(59,130,246,0.28)',
+          }}>
+            <ShoppingCart size={20} color="#93C5FD" />
             {cartCount > 0 && (
-              <span style={{ position: 'absolute', top: '-4px', right: '-4px', backgroundColor: 'var(--primary)', color: 'white', fontSize: '11px', fontWeight: '700', width: '20px', height: '20px', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{cartCount}</span>
+              <span style={{
+                position: 'absolute', top: '-5px', right: '-5px',
+                background: 'linear-gradient(135deg, #3B82F6, #1D4ED8)',
+                color: 'white', fontSize: '11px', fontWeight: '700',
+                width: '18px', height: '18px', borderRadius: '9px',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+              }}>{cartCount}</span>
             )}
           </button>
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            style={{ border: 'none', background: isMenuOpen ? 'var(--bg-pink-light)' : 'transparent', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '10px', borderRadius: '12px', color: isMenuOpen ? 'var(--primary)' : 'var(--text-main)' }}
-          >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          <button onClick={() => setIsMenuOpen(!isMenuOpen)} style={{
+            border: '1px solid rgba(147,197,253,0.22)',
+            background: isMenuOpen ? 'rgba(59,130,246,0.18)' : 'rgba(255,255,255,0.06)',
+            cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
+            padding: '10px', borderRadius: '12px',
+            color: isMenuOpen ? '#93C5FD' : 'rgba(255,255,255,0.7)',
+          }}>
+            {isMenuOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Navigation Full Screen Overlay */}
-      <div style={{ position: 'absolute', top: '80px', left: 0, right: 0, height: isMenuOpen ? 'calc(100vh - 80px)' : '0', backgroundColor: 'white', display: 'flex', flexDirection: 'column', overflow: 'hidden', transition: 'height 0.4s cubic-bezier(0.16, 1, 0.3, 1)', boxShadow: isMenuOpen ? '0 20px 25px -5px rgba(0, 0, 0, 0.1)' : 'none' }}>
-        <div style={{ padding: '32px 24px', display: 'flex', flexDirection: 'column', gap: '32px', height: '100%', opacity: isMenuOpen ? 1 : 0, transition: 'opacity 0.3s ease 0.1s' }}>
+      {/* Mobile Overlay */}
+      <div style={{
+        position: 'absolute', top: '76px', left: 0, right: 0,
+        height: isMenuOpen ? 'calc(100vh - 76px)' : '0',
+        background: 'rgba(2,8,24,0.92)',
+        backdropFilter: 'blur(32px)',
+        WebkitBackdropFilter: 'blur(32px)',
+        display: 'flex', flexDirection: 'column', overflow: 'hidden',
+        transition: 'height 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+        borderTop: '1px solid rgba(147,197,253,0.12)',
+      }}>
+        <div style={{
+          padding: '40px 24px', display: 'flex', flexDirection: 'column', gap: '32px', height: '100%',
+          opacity: isMenuOpen ? 1 : 0, transition: 'opacity 0.3s ease 0.1s',
+        }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-            <Link to="/" onClick={() => setIsMenuOpen(false)} style={{ color: 'var(--text-main)', fontSize: '24px', fontWeight: '700' }}>Home</Link>
-            <Link to="/products" onClick={() => setIsMenuOpen(false)} style={{ color: 'var(--text-main)', fontSize: '24px', fontWeight: '700' }}>Portfolio & Store</Link>
+            {[['/', 'Home'], ['/products', 'Portfolio & Store']].map(([path, label]) => (
+              <Link key={path} to={path} onClick={() => setIsMenuOpen(false)} style={{
+                color: 'rgba(255,255,255,0.85)', fontSize: '24px', fontWeight: '700',
+                fontFamily: "'Sora', sans-serif", letterSpacing: '-0.02em',
+              }}>{label}</Link>
+            ))}
           </div>
           <div style={{ marginTop: 'auto', display: 'flex', flexDirection: 'column', gap: '16px', paddingBottom: '40px' }}>
             {isLoggedIn ? (
               <>
-                <div style={{ fontSize: '16px', color: 'var(--text-muted)', textAlign: 'center' }}>Signed in as <strong style={{ color: 'var(--text-main)' }}>{user?.name}</strong></div>
-                <button onClick={handleLogout} className="btn" style={{ padding: '16px', fontSize: '18px', border: '2px solid #FEE2E2', borderRadius: '12px', color: '#EF4444', fontWeight: '600', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+                <div style={{ fontSize: '15px', color: 'rgba(255,255,255,0.50)', textAlign: 'center' }}>
+                  Signed in as <strong style={{ color: '#93C5FD' }}>{user?.name}</strong>
+                </div>
+                <button onClick={handleLogout} className="btn" style={{
+                  padding: '16px', fontSize: '17px',
+                  border: '1px solid rgba(252,165,165,0.25)', borderRadius: '14px',
+                  color: '#FCA5A5', fontWeight: '600',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px',
+                  background: 'rgba(252,165,165,0.08)',
+                }}>
                   <LogOut size={20} /> Logout
                 </button>
               </>
             ) : (
-              <Link to="/login" onClick={() => setIsMenuOpen(false)} className="btn btn-primary flex items-center justify-center gap-2" style={{ padding: '16px', fontSize: '18px' }}>
+              <Link to="/login" onClick={() => setIsMenuOpen(false)} className="btn btn-primary flex items-center justify-center gap-2" style={{ padding: '16px', fontSize: '17px' }}>
                 <User size={20} /> Login / Create Account
               </Link>
             )}
@@ -107,9 +191,7 @@ const Navbar = () => {
       </div>
 
       <style>{`
-        @media (min-width: 769px) {
-            .mobile-only-btn { display: none !important; }
-        }
+        @media (min-width: 769px) { .mobile-only-btn { display: none !important; } }
       `}</style>
     </header>
   );
