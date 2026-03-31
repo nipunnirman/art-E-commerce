@@ -3,13 +3,13 @@ import { Plus, Edit, Trash2, X, Image as ImageIcon, Shield, Eye, EyeOff, LogOut 
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5001/api';
 
-// Initial Mock Data
-const initialProducts = [
-    { id: 1, tag: 'ABSTRACT', title: 'Abstract Harmony', price: 1299, image: 'https://images.unsplash.com/photo-1549887552-cb1071d3e5ca?q=80&w=2670&auto=format&fit=crop' },
-    { id: 2, tag: 'LANDSCAPE', title: 'Watercolor Dreams', price: 899, image: 'https://images.unsplash.com/photo-1506815340158-fcbdd5601a4e?q=80&w=2670&auto=format&fit=crop' },
-    { id: 3, tag: 'SCULPTURE', title: 'Modern Form', price: 2499, image: 'https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=2670&auto=format&fit=crop' },
-    { id: 4, tag: 'PORTRAIT', title: 'Vivid Portrait', price: 1599, image: 'https://images.unsplash.com/photo-1536924940846-227afb31e2a5?q=80&w=2670&auto=format&fit=crop' }
-];
+const formatGdriveLink = (url) => {
+    const match = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+    if (match && match[1]) {
+        return `https://drive.google.com/uc?export=view&id=${match[1]}`;
+    }
+    return url;
+};
 
 // ── Admin Login Component ──────────────────────────────────────────────────
 const AdminLogin = ({ onLogin }) => {
@@ -96,7 +96,7 @@ const AdminLogin = ({ onLogin }) => {
 const AdminDashboard = () => {
     const [adminToken, setAdminToken] = useState(null);
     const [adminUser, setAdminUser] = useState(null);
-    const [products, setProducts] = useState(initialProducts);
+    const [products, setProducts] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [editingProduct, setEditingProduct] = useState(null);
     const [formData, setFormData] = useState({ tag: '', title: '', price: '', image: '' });
@@ -112,6 +112,20 @@ const AdminDashboard = () => {
                 setAdminUser(user);
             }
         }
+        
+        // Fetch products
+        const fetchProducts = async () => {
+            try {
+                const res = await fetch(`${API_BASE}/products`);
+                const data = await res.json();
+                if (data.success) {
+                    setProducts(data.data);
+                }
+            } catch (err) {
+                console.error('Failed to fetch products', err);
+            }
+        };
+        fetchProducts();
     }, []);
 
     const handleAdminLogin = (token, user) => {
@@ -149,19 +163,65 @@ const AdminDashboard = () => {
         setEditingProduct(null);
     };
 
-    const handleSave = (e) => {
+    const handleSave = async (e) => {
         e.preventDefault();
-        if (editingProduct) {
-            setProducts(products.map(p => p.id === editingProduct.id ? { ...formData, id: p.id, price: Number(formData.price) } : p));
-        } else {
-            setProducts([...products, { ...formData, id: Date.now(), price: Number(formData.price) }]);
+        
+        // Convert Google Drive Links automatically
+        const formattedImage = formatGdriveLink(formData.image);
+        const payload = { ...formData, image: formattedImage, price: Number(formData.price) };
+        
+        try {
+            if (editingProduct) {
+                // Update
+                const res = await fetch(`${API_BASE}/products/${editingProduct._id || editingProduct.id}`, {
+                    method: 'PUT',
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${adminToken}`
+                    },
+                    body: JSON.stringify(payload)
+                });
+                const data = await res.json();
+                if (data.success) {
+                    setProducts(products.map(p => (p._id || p.id) === (editingProduct._id || editingProduct.id) ? data.data : p));
+                }
+            } else {
+                // Create
+                const res = await fetch(`${API_BASE}/products`, {
+                    method: 'POST',
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${adminToken}`
+                    },
+                    body: JSON.stringify(payload)
+                });
+                const data = await res.json();
+                if (data.success) {
+                    setProducts([data.data, ...products]);
+                }
+            }
+        } catch (err) {
+            console.error('Save failed', err);
+            alert('Failed to save product to database.');
         }
+
         handleCloseModal();
     };
 
-    const handleDelete = (id) => {
+    const handleDelete = async (id) => {
         if (window.confirm('Are you sure you want to delete this artwork?')) {
-            setProducts(products.filter(p => p.id !== id));
+            try {
+                const res = await fetch(`${API_BASE}/products/${id}`, {
+                    method: 'DELETE',
+                    headers: { 'Authorization': `Bearer ${adminToken}` }
+                });
+                if (res.ok) {
+                    setProducts(products.filter(p => (p._id || p.id) !== id));
+                }
+            } catch (err) {
+                console.error('Delete failed', err);
+                alert('Failed to delete artwork.');
+            }
         }
     };
 
@@ -208,7 +268,7 @@ const AdminDashboard = () => {
                                 </tr>
                             ) : (
                                 products.map((product) => (
-                                    <tr key={product.id} style={{ borderBottom: '1px solid var(--border-color)', transition: 'background-color 0.2s' }} className="admin-row">
+                                    <tr key={product._id || product.id} style={{ borderBottom: '1px solid var(--border-color)', transition: 'background-color 0.2s' }} className="admin-row">
                                         <td style={{ padding: '16px' }}>
                                             <div style={{ width: '60px', height: '60px', borderRadius: '8px', backgroundImage: `url(${product.image})`, backgroundSize: 'cover', backgroundPosition: 'center', border: '1px solid var(--border-color)' }}></div>
                                         </td>
@@ -220,7 +280,7 @@ const AdminDashboard = () => {
                                                 <button onClick={() => handleOpenModal(product)} style={{ padding: '8px', borderRadius: '8px', color: 'var(--text-muted)', backgroundColor: 'var(--bg-color)', border: '1px solid var(--border-color)' }}>
                                                     <Edit size={16} />
                                                 </button>
-                                                <button onClick={() => handleDelete(product.id)} style={{ padding: '8px', borderRadius: '8px', color: '#EF4444', backgroundColor: '#FEF2F2', border: '1px solid #FEE2E2' }}>
+                                                <button onClick={() => handleDelete(product._id || product.id)} style={{ padding: '8px', borderRadius: '8px', color: '#EF4444', backgroundColor: '#FEF2F2', border: '1px solid #FEE2E2' }}>
                                                     <Trash2 size={16} />
                                                 </button>
                                             </div>

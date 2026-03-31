@@ -1,22 +1,31 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { ShoppingCart, ArrowRight, Heart, Check } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
 
 
-const products = [
-  { id: 1, tag: 'ORIGINAL', title: 'Artwork I', price: '$1,299', image: '/home/img3.jpg' },
-  { id: 2, tag: 'ORIGINAL', title: 'Artwork II', price: '$899', image: '/home/sell1.JPG' },
-  { id: 3, tag: 'ORIGINAL', title: 'Artwork III', price: '$2,499', image: '/home/img3.jpg' },
-  { id: 4, tag: 'ORIGINAL', title: 'Artwork IV', price: '$1,599', image: '/home/sell1.JPG' },
-];
-
-
 const FeaturedCollection = () => {
   const { isLoggedIn } = useAuth();
   const { addToCart, items } = useCart();
   const navigate = useNavigate();
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5001/api';
+        const res = await fetch(`${API_BASE}/products`);
+        const data = await res.json();
+        if (data.success) {
+          setProducts(data.data.slice(0, 4));
+        }
+      } catch (err) {
+        console.error('Failed to fetch featured products', err);
+      }
+    };
+    fetchProducts();
+  }, []);
 
   const handleAdd = (product) => {
     if (!isLoggedIn) return navigate('/login');
@@ -37,9 +46,10 @@ const FeaturedCollection = () => {
 
       <div className="grid-responsive grid-cols-4">
         {products.map(product => {
-          const inCart = items.some(i => i.id === product.id);
+          const productId = product._id || product.id;
+          const inCart = items.some(i => (i._id || i.id) === productId);
           return (
-            <div key={product.id} className="product-card" style={{
+            <div key={productId} className="product-card" style={{
               borderRadius: '22px',
               background: 'rgba(255,255,255,0.05)',
               backdropFilter: 'blur(24px)',
@@ -117,7 +127,7 @@ const FeaturedCollection = () => {
                     fontFamily: "'Sora', sans-serif",
                     background: 'linear-gradient(135deg, #fff, #93C5FD)',
                     WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
-                  }}>{product.price}</div>
+                  }}>${product.price}</div>
                   <button
                     onClick={() => handleAdd(product)}
                     className="btn btn-sm flex items-center justify-center gap-2"

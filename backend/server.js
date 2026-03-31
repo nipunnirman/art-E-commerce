@@ -25,6 +25,7 @@ app.get('/api/health', (req, res) => {
 // ── Mount API Route Modules ────────────────────────────────────────────────
 app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/admin', require('./routes/adminRoutes'));
+app.use('/api/products', require('./routes/productRoutes'));
 
 // ── 404 Handler ────────────────────────────────────────────────────────────
 app.use((req, res, next) => {
