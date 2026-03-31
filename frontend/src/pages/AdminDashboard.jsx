@@ -310,7 +310,7 @@ const AdminDashboard = () => {
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                                     <input type="url" required value={formData.image} onChange={e => setFormData({ ...formData, image: e.target.value })} placeholder="https://unsplash.com..." style={{ flex: 1, padding: '12px 16px', borderRadius: '8px', border: '1px solid var(--border-color)', outline: 'none' }} />
                                     <div style={{ width: '44px', height: '44px', borderRadius: '8px', backgroundColor: 'var(--bg-pink-light)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                                        {formData.image ? <img src={formData.image} alt="preview" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '8px' }} /> : <ImageIcon size={20} color="var(--primary)" />}
+                                        {formData.image ? <img src={formatGdriveLink(formData.image)} alt="preview" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '8px' }} /> : <ImageIcon size={20} color="var(--primary)" />}
                                     </div>
                                 </div>
                             </div>
