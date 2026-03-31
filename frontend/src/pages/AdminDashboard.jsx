@@ -48,7 +48,7 @@ const AdminLogin = ({ onLogin }) => {
 
     return (
         <div className="container flex justify-center items-center" style={{ minHeight: '80vh', padding: '60px 24px' }}>
-            <div style={{ width: '100%', maxWidth: '420px', padding: '48px', border: '1px solid var(--border-color)', borderRadius: '24px', backgroundColor: 'white', boxShadow: '0 20px 60px rgba(0,0,0,0.05)' }}>
+            <div style={{ width: '100%', maxWidth: '420px', padding: '48px', border: '1px solid var(--border-color)', borderRadius: '24px', backgroundColor: 'var(--bg-mid)', boxShadow: '0 20px 60px rgba(0,0,0,0.5)' }}>
                 <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '24px' }}>
                     <div style={{ width: '64px', height: '64px', borderRadius: '16px', backgroundColor: 'var(--bg-pink-light)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                         <Shield size={32} color="var(--primary)" />
@@ -84,6 +84,10 @@ const AdminLogin = ({ onLogin }) => {
                     </button>
                 </form>
             </div>
+            <style>{`
+                input { background-color: rgba(255,255,255,0.05); color: white; }
+                input::placeholder { color: rgba(255,255,255,0.3); }
+            `}</style>
         </div>
     );
 };
@@ -231,8 +235,8 @@ const AdminDashboard = () => {
 
             {/* Modal */}
             {isModalOpen && (
-                <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0,0,0,0.5)', backdropFilter: 'blur(4px)', zIndex: 100, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px' }}>
-                    <div style={{ backgroundColor: 'white', borderRadius: '24px', width: '100%', maxWidth: '500px', padding: '32px', boxShadow: '0 20px 40px rgba(0,0,0,0.2)', position: 'relative' }}>
+                <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0,0,0,0.7)', backdropFilter: 'blur(8px)', zIndex: 100, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px' }}>
+                    <div style={{ backgroundColor: 'var(--bg-mid)', borderRadius: '24px', width: '100%', maxWidth: '500px', padding: '32px', boxShadow: '0 24px 48px rgba(0,0,0,0.5)', position: 'relative', border: '1px solid var(--border-color)' }}>
                         <button onClick={handleCloseModal} style={{ position: 'absolute', top: '24px', right: '24px', color: 'var(--text-muted)' }}>
                             <X size={24} />
                         </button>
@@ -278,6 +282,9 @@ const AdminDashboard = () => {
 
             <style>{`
                 .admin-row:hover { background-color: rgba(255,255,255,0.04); }
+                input { background-color: rgba(255,255,255,0.05); color: white; transition: all 0.2s; }
+                input:focus { border-color: rgba(59,130,246,0.5); background-color: rgba(255,255,255,0.08); }
+                input::placeholder { color: rgba(255,255,255,0.3); }
             `}</style>
         </div>
     );
