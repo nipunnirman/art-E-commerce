@@ -1,8 +1,34 @@
 import { ArrowRight, Sparkles, ChevronDown } from 'lucide-react';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import heroImgMain from '../assets/home/img3.jpg';
 import heroImgSec1 from '../assets/home/sell1.JPG';
 import heroImgSec2 from '../assets/home/IMG_4285.JPG';
+
+const AnimatedNumber = ({ value }) => {
+  const [count, setCount] = useState(0);
+  const numericValue = parseInt(value.replace(/[^0-9]/g, ''), 10);
+  const suffix = value.replace(/[0-9]/g, '');
+
+  useEffect(() => {
+    let start = 0;
+    const end = numericValue;
+    if (isNaN(end)) return;
+    const duration = 2000;
+    let startTimestamp = null;
+    const step = (timestamp) => {
+      if (!startTimestamp) startTimestamp = timestamp;
+      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+      const easeProgress = 1 - Math.pow(1 - progress, 4);
+      setCount(Math.floor(easeProgress * (end - start) + start));
+      if (progress < 1) {
+        window.requestAnimationFrame(step);
+      }
+    };
+    window.requestAnimationFrame(step);
+  }, [numericValue]);
+
+  return <>{count}{suffix}</>;
+};
 
 const Hero = () => {
   return (
@@ -61,7 +87,7 @@ const Hero = () => {
               <React.Fragment key={i}>
                 {i > 0 && <div style={{ width: '1px', height: '40px', margin: '0 28px', background: 'linear-gradient(180deg, transparent, rgba(147,197,253,0.3), transparent)' }} />}
                 <div className="flex items-center gap-3">
-                  <div style={{ fontFamily: "'Sora',sans-serif", fontSize: '30px', fontWeight: '800', background: 'linear-gradient(135deg,#93C5FD,#60A5FA)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>{stat.value}</div>
+                  <div style={{ fontFamily: "'Sora',sans-serif", fontSize: '30px', fontWeight: '800', background: 'linear-gradient(135deg,#93C5FD,#60A5FA)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}><AnimatedNumber value={stat.value} /></div>
                   <div style={{ color: 'rgba(255,255,255,0.48)', fontSize: '13px', fontWeight: '500', lineHeight: 1.3, whiteSpace: 'pre-line' }}>{stat.label}</div>
                 </div>
               </React.Fragment>
@@ -184,9 +210,9 @@ const Hero = () => {
           {/* Stats — horizontal scroll cards */}
           <div style={{ display: 'flex', gap: '10px' }}>
             {[
-              { value: '50+', label: 'Artworks', icon: '🎨' },
-              { value: '100%', label: 'Authentic', icon: '✦' },
-              { value: '2K+', label: 'Collectors', icon: '♡' },
+              { value: '50+', label: 'Artworks', icon:  },
+              { value: '100%', label: 'Authentic', icon:  },
+              { value: '2K+', label: 'Collectors', icon:  },
             ].map((stat, i) => (
               <div key={i} style={{
                 flex: 1,
@@ -204,7 +230,7 @@ const Hero = () => {
                   background: 'linear-gradient(135deg,#93C5FD,#60A5FA)',
                   WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
                   lineHeight: 1,
-                }}>{stat.value}</div>
+                }}><AnimatedNumber value={stat.value} /></div>
                 <div style={{ color: 'rgba(255,255,255,0.45)', fontSize: '11px', fontWeight: '600', marginTop: '4px', letterSpacing: '0.04em' }}>{stat.label}</div>
               </div>
             ))}
