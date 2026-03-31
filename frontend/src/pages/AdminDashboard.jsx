@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Plus, Edit, Trash2, X, Image as ImageIcon, Shield, Eye, EyeOff, LogOut } from 'lucide-react';
 
-const API_BASE = 'http://localhost:5001/api';
+const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5001/api';
 
 // Initial Mock Data
 const initialProducts = [
