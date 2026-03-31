@@ -142,7 +142,7 @@ const Hero = () => {
           >
             <div style={{
               gridRow: 'span 2', borderRadius: '24px', minHeight: '440px',
-              backgroundImage: 'url("https://images.unsplash.com/photo-1549887552-cb1071d3e5ca?q=80&w=2670&auto=format&fit=crop")',
+              backgroundImage: 'url("/home/img3.jpg")',
               backgroundSize: 'cover', backgroundPosition: 'center',
               boxShadow: '0 24px 48px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.08)',
               position: 'relative', overflow: 'hidden',
@@ -155,8 +155,8 @@ const Hero = () => {
             </div>
             <div style={{ display: 'grid', gap: '14px' }}>
               {[
-                'https://images.unsplash.com/photo-1506815340158-fcbdd5601a4e?q=80&w=2670&auto=format&fit=crop',
-                'https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=2670&auto=format&fit=crop',
+                '/home/sell1.JPG',
+                '/home/img3.jpg',
               ].map((url, i) => (
                 <div key={i} style={{
                   borderRadius: '20px', minHeight: '212px',

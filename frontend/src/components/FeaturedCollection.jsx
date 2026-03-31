@@ -4,12 +4,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
 
+
 const products = [
-  { id: 1, tag: 'ABSTRACT', title: 'Abstract Harmony', price: '$1,299', image: 'https://images.unsplash.com/photo-1549887552-cb1071d3e5ca?q=80&w=2670&auto=format&fit=crop' },
-  { id: 2, tag: 'LANDSCAPE', title: 'Watercolor Dreams', price: '$899', image: 'https://images.unsplash.com/photo-1506815340158-fcbdd5601a4e?q=80&w=2670&auto=format&fit=crop' },
-  { id: 3, tag: 'SCULPTURE', title: 'Modern Form', price: '$2,499', image: 'https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=2670&auto=format&fit=crop' },
-  { id: 4, tag: 'PORTRAIT', title: 'Vivid Portrait', price: '$1,599', image: 'https://images.unsplash.com/photo-1536924940846-227afb31e2a5?q=80&w=2670&auto=format&fit=crop' },
+  { id: 1, tag: 'ORIGINAL', title: 'Artwork I', price: '$1,299', image: '/home/img3.jpg' },
+  { id: 2, tag: 'ORIGINAL', title: 'Artwork II', price: '$899', image: '/home/sell1.JPG' },
+  { id: 3, tag: 'ORIGINAL', title: 'Artwork III', price: '$2,499', image: '/home/img3.jpg' },
+  { id: 4, tag: 'ORIGINAL', title: 'Artwork IV', price: '$1,599', image: '/home/sell1.JPG' },
 ];
+
 
 const FeaturedCollection = () => {
   const { isLoggedIn } = useAuth();
