@@ -38,7 +38,7 @@ const CustomArt = () => {
     const currentPrice = pricing[artType].find(opt => opt.label === sizeFrame)?.price || 0;
 
     const handleOrder = () => {
-        const waNumber = "+94700000000"; // REPLACE WITH ACTUAL WA NUMBER
+        const waNumber = "+94757105455";
         const text = `Hello! I would like to order a Custom Pencil Art.
 
 *Type:* ${artType}
