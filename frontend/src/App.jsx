@@ -10,6 +10,7 @@ import Home from './pages/Home';
 import Products from './pages/Products';
 import Login from './pages/Login';
 import AdminDashboard from './pages/AdminDashboard';
+import CustomArt from './pages/CustomArt';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
               <Route path="/products" element={<Products />} />
               <Route path="/login" element={<Login />} />
               <Route path="/admin" element={<AdminDashboard />} />
+              <Route path="/custom-art" element={<CustomArt />} />
             </Routes>
             <Footer />
             <Chatbot />

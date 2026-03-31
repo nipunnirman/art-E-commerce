@@ -60,14 +60,18 @@ const Navbar = () => {
 
           {/* Desktop Nav */}
           <nav className="nav-desktop flex items-center gap-8">
-            {['/', '/products'].map((path, i) => (
-              <Link key={i} to={path} style={{
+            {[
+              { path: '/', label: 'Home' },
+              { path: '/products', label: 'Portfolio' },
+              { path: '/custom-art', label: 'Custom Art' }
+            ].map(({ path, label }) => (
+              <Link key={path} to={path} style={{
                 color: 'rgba(255,255,255,0.60)', fontSize: '15px', fontWeight: '500',
                 transition: 'color 0.2s', fontFamily: "'Sora',sans-serif",
               }}
                 onMouseOver={e => e.target.style.color = 'rgba(255,255,255,0.95)'}
                 onMouseOut={e => e.target.style.color = 'rgba(255,255,255,0.60)'}
-              >{i === 0 ? 'Home' : 'Portfolio'}</Link>
+              >{label}</Link>
             ))}
             {isLoggedIn ? (
               <div className="flex items-center gap-4">
@@ -180,7 +184,11 @@ const Navbar = () => {
 
         {/* Nav links */}
         <div style={{ padding: '40px 28px', flex: 1, display: 'flex', flexDirection: 'column', gap: '8px' }}>
-          {[['/', 'Home'], ['/products', 'Portfolio & Store']].map(([path, label], i) => (
+          {[
+            ['/', 'Home'], 
+            ['/products', 'Portfolio & Store'], 
+            ['/custom-art', 'Custom Art']
+          ].map(([path, label], i) => (
             <Link key={path} to={path} onClick={() => setIsMenuOpen(false)} style={{
               display: 'flex', alignItems: 'center', justifyContent: 'space-between',
               padding: '20px 0',
