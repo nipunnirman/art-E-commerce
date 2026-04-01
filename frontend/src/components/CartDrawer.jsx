@@ -168,7 +168,23 @@ const CartDrawer = () => {
                 WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
               }}>${cartTotal.toLocaleString()}</span>
             </div>
-            <button className="btn btn-primary" style={{ width: '100%', padding: '16px', fontSize: '15px' }}>
+            <button 
+              onClick={() => {
+                const waNumber = "94757105455";
+                let text = "Hello! I would like to proceed with the items in my cart:\n\n";
+                items.forEach(item => {
+                  text += `*${item.tag || 'Item'}*\n`;
+                  text += `${item.title}\n`;
+                  text += `${item.price}\n`;
+                  text += `Qty: ${item.qty}\n\n`;
+                });
+                text += `*Subtotal: $${cartTotal.toLocaleString()}*`;
+                const url = `https://wa.me/${waNumber}?text=${encodeURIComponent(text)}`;
+                window.open(url, '_blank');
+              }}
+              className="btn btn-primary" 
+              style={{ width: '100%', padding: '16px', fontSize: '15px' }}
+            >
               Proceed to Checkout
             </button>
           </div>
