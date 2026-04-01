@@ -122,7 +122,7 @@ const Chatbot = () => {
                 <div style={{ flex: 1, padding: '20px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '16px', backgroundColor: '#F9FAFB' }}>
                     {messages.map(msg => (
                         <div key={msg.id} style={{ alignSelf: msg.sender === 'user' ? 'flex-end' : 'flex-start', maxWidth: '80%' }}>
-                            <div style={{ backgroundColor: msg.sender === 'user' ? 'var(--primary)' : 'white', color: msg.sender === 'user' ? 'white' : 'var(--text-main)', padding: '12px 16px', borderRadius: msg.sender === 'user' ? '16px 16px 4px 16px' : '16px 16px 16px 4px', fontSize: '14px', boxShadow: msg.sender === 'bot' ? '0 2px 4px rgba(0,0,0,0.05)' : 'none', lineHeight: '1.5' }}>
+                            <div style={{ backgroundColor: msg.sender === 'user' ? 'var(--primary, #3B82F6)' : 'white', color: msg.sender === 'user' ? 'white' : '#1e293b', padding: '12px 16px', borderRadius: msg.sender === 'user' ? '16px 16px 4px 16px' : '16px 16px 16px 4px', fontSize: '14px', boxShadow: msg.sender === 'bot' ? '0 2px 4px rgba(0,0,0,0.05)' : 'none', lineHeight: '1.5' }}>
                                 {msg.text}
                             </div>
                         </div>
