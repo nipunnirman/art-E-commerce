@@ -14,13 +14,46 @@ const Chatbot = () => {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    const handleSend = () => {
-        if (!input.trim()) return;
-        setMessages(prev => [...prev, { id: Date.now(), text: input, sender: 'user' }]);
+    const [isLoading, setIsLoading] = useState(false);
+
+    const handleSend = async () => {
+        if (!input.trim() || isLoading) return;
+        const newMessages = [...messages, { id: Date.now(), text: input, sender: 'user' }];
+        setMessages(newMessages);
         setInput('');
-        setTimeout(() => {
-            setMessages(prev => [...prev, { id: Date.now() + 1, text: "Thanks for reaching out! Since I'm just an assistant, I will pass this message along. Nipunnirman will get back to you soon.", sender: 'bot' }]);
-        }, 1000);
+        setIsLoading(true);
+
+        // Add a temporary loading message
+        const loadingId = Date.now() + 1;
+        setMessages(prev => [...prev, { id: loadingId, text: "Thinking...", sender: 'bot', isLoadingMsg: true }]);
+
+        try {
+            const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5001/api';
+            const response = await fetch(`${API_BASE}/chat`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ messages: newMessages })
+            });
+
+            const data = await response.json();
+            
+            // Remove loading msg and append actual response
+            setMessages(prev => {
+                const filtered = prev.filter(m => m.id !== loadingId);
+                return [...filtered, { 
+                    id: Date.now() + 2, 
+                    text: data.success ? data.reply : "Sorry, I had trouble processing that request.", 
+                    sender: 'bot' 
+                }];
+            });
+        } catch (error) {
+            setMessages(prev => {
+                const filtered = prev.filter(m => m.id !== loadingId);
+                return [...filtered, { id: Date.now() + 2, text: "Network error. Please try again later.", sender: 'bot' }];
+            });
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     const getChatWindowStyles = () => {
