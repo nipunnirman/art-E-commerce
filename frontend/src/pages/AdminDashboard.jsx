@@ -274,7 +274,7 @@ const AdminDashboard = () => {
                                         </td>
                                         <td style={{ padding: '16px', fontWeight: '600', color: 'var(--text-main)' }}>{product.title}</td>
                                         <td style={{ padding: '16px', color: 'var(--text-muted)', fontSize: '14px' }}>{product.tag}</td>
-                                        <td style={{ padding: '16px', fontWeight: '600' }}>${product.price}</td>
+                                        <td style={{ padding: '16px', fontWeight: '600' }}>Rs. {product.price}</td>
                                         <td style={{ padding: '16px', textAlign: 'right' }}>
                                             <div className="flex items-center justify-end gap-2">
                                                 <button onClick={() => handleOpenModal(product)} style={{ padding: '8px', borderRadius: '8px', color: 'var(--text-muted)', backgroundColor: 'var(--bg-color)', border: '1px solid var(--border-color)' }}>
@@ -326,7 +326,7 @@ const AdminDashboard = () => {
                                     <input type="text" required value={formData.tag} onChange={e => setFormData({ ...formData, tag: e.target.value })} placeholder="e.g. ABSTRACT" style={{ width: '100%', padding: '12px 16px', borderRadius: '8px', border: '1px solid var(--border-color)', outline: 'none' }} />
                                 </div>
                                 <div>
-                                    <label style={{ display: 'block', fontSize: '14px', fontWeight: '600', marginBottom: '8px' }}>Price ($)</label>
+                                    <label style={{ display: 'block', fontSize: '14px', fontWeight: '600', marginBottom: '8px' }}>Price (Rs)</label>
                                     <input type="number" required min="0" value={formData.price} onChange={e => setFormData({ ...formData, price: e.target.value })} placeholder="1299" style={{ width: '100%', padding: '12px 16px', borderRadius: '8px', border: '1px solid var(--border-color)', outline: 'none' }} />
                                 </div>
                             </div>

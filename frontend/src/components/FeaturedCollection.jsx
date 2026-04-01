@@ -67,7 +67,7 @@ const FeaturedCollection = () => {
                 <h3 style={{ fontSize: '16px', fontWeight: '700', marginBottom: '4px', color: 'rgba(255,255,255,0.90)', fontFamily: "'Sora',sans-serif" }}>{product.title}</h3>
                 <div style={{ flex: 1 }} />
                 <div className="flex items-center justify-between" style={{ marginTop: '12px', paddingTop: '12px', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
-                  <div style={{ fontSize: '18px', fontWeight: '800', fontFamily: "'Sora',sans-serif", background: 'linear-gradient(135deg,#fff,#93C5FD)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>${product.price}</div>
+                  <div style={{ fontSize: '18px', fontWeight: '800', fontFamily: "'Sora',sans-serif", background: 'linear-gradient(135deg,#fff,#93C5FD)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>Rs. {product.price}</div>
                   <button onClick={() => handleAdd(product)} className="btn btn-sm flex items-center gap-1" style={{ borderRadius: '8px', background: inCart ? 'linear-gradient(135deg,#16a34a,#15803d)' : 'linear-gradient(135deg,#3B82F6,#1D4ED8)', color: 'white', border: 'none', boxShadow: inCart ? '0 4px 12px rgba(22,163,74,0.4)' : '0 4px 12px rgba(59,130,246,0.4)' }}>
                     {inCart ? <><Check size={13} /> Added</> : <><ShoppingCart size={13} /> Add</>}
                   </button>
@@ -105,7 +105,7 @@ const FeaturedCollection = () => {
                   <div style={{ fontSize: '10px', fontWeight: '700', letterSpacing: '0.1em', marginBottom: '4px', background: 'linear-gradient(135deg,#93C5FD,#60A5FA)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>{product.tag}</div>
                   <h3 style={{ fontSize: '15px', fontWeight: '700', marginBottom: '12px', color: 'rgba(255,255,255,0.90)', fontFamily: "'Sora',sans-serif" }}>{product.title}</h3>
                   <div className="flex items-center justify-between">
-                    <div style={{ fontSize: '17px', fontWeight: '800', fontFamily: "'Sora',sans-serif", background: 'linear-gradient(135deg,#fff,#93C5FD)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>${product.price}</div>
+                    <div style={{ fontSize: '17px', fontWeight: '800', fontFamily: "'Sora',sans-serif", background: 'linear-gradient(135deg,#fff,#93C5FD)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>Rs. {product.price}</div>
                     <button onClick={() => handleAdd(product)} style={{ padding: '8px 14px', borderRadius: '10px', background: inCart ? 'linear-gradient(135deg,#16a34a,#15803d)' : 'linear-gradient(135deg,#3B82F6,#1D4ED8)', color: 'white', border: 'none', fontSize: '13px', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '5px', fontFamily: "'Sora',sans-serif" }}>
                       {inCart ? <><Check size={13} /> Added</> : <><ShoppingCart size={13} /> Add</>}
                     </button>

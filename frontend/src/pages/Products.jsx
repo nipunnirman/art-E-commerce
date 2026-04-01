@@ -73,7 +73,7 @@ const Products = () => {
                 <h3 style={{ fontSize: '17px', fontWeight: '800', marginBottom: '4px', color: 'rgba(255,255,255,0.92)', fontFamily: "'Sora',sans-serif" }}>{product.title}</h3>
                 <div style={{ flex: 1 }} />
                 <div className="flex items-center justify-between" style={{ marginTop: '16px', paddingTop: '14px', borderTop: '1px solid rgba(255,255,255,0.07)' }}>
-                  <div style={{ fontSize: '20px', fontWeight: '800', color: 'rgba(255,255,255,0.95)', fontFamily: "'Sora',sans-serif" }}>${product.price}</div>
+                  <div style={{ fontSize: '20px', fontWeight: '800', color: 'rgba(255,255,255,0.95)', fontFamily: "'Sora',sans-serif" }}>Rs. {product.price}</div>
                   <button onClick={() => handleAdd(product)} style={{ padding: '9px 16px', borderRadius: '10px', background: inCart ? 'linear-gradient(135deg,#16a34a,#15803d)' : 'linear-gradient(135deg,#3B82F6,#1D4ED8)', color: 'white', border: 'none', fontSize: '13px', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '5px', fontFamily: "'Sora',sans-serif", boxShadow: inCart ? '0 4px 12px rgba(22,163,74,0.35)' : '0 4px 12px rgba(59,130,246,0.35)' }}>
                     {inCart ? <><Check size={14} /> Added</> : <><ShoppingCart size={14} /> Add</>}
                   </button>
@@ -99,7 +99,7 @@ const Products = () => {
                   </button>
                   {/* Price overlay at bottom of image */}
                   <div style={{ position: 'absolute', bottom: '8px', left: '10px' }}>
-                    <div style={{ fontSize: '17px', fontWeight: '800', color: '#fff', fontFamily: "'Sora',sans-serif", textShadow: '0 2px 8px rgba(0,0,0,0.8)' }}>${product.price}</div>
+                    <div style={{ fontSize: '17px', fontWeight: '800', color: '#fff', fontFamily: "'Sora',sans-serif", textShadow: '0 2px 8px rgba(0,0,0,0.8)' }}>Rs. {product.price}</div>
                   </div>
                 </div>
               </div>

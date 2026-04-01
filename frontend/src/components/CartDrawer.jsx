@@ -166,7 +166,7 @@ const CartDrawer = () => {
                 fontFamily: "'Sora', sans-serif",
                 background: 'linear-gradient(135deg, #fff, #93C5FD)',
                 WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
-              }}>${cartTotal.toLocaleString()}</span>
+              }}>Rs. {cartTotal.toLocaleString()}</span>
             </div>
             <button 
               onClick={() => {
@@ -178,7 +178,7 @@ const CartDrawer = () => {
                   text += `${item.price}\n`;
                   text += `Qty: ${item.qty}\n\n`;
                 });
-                text += `*Subtotal: $${cartTotal.toLocaleString()}*`;
+                text += `*Subtotal: Rs. ${cartTotal.toLocaleString()}*`;
                 const url = `https://wa.me/${waNumber}?text=${encodeURIComponent(text)}`;
                 window.open(url, '_blank');
               }}
