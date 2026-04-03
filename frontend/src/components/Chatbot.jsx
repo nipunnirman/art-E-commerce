@@ -96,6 +96,48 @@ const Chatbot = () => {
         };
     };
 
+    const renderMessageContent = (text) => {
+        if (!text) return null;
+        
+        // Split by newlines to preserve formatting
+        return text.split('\n').map((line, lineIndex) => {
+            // Regex to find markdown links: [Link Text](https://link.url)
+            const markdownLinkRegex = /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g;
+            const parts = [];
+            let lastIndex = 0;
+            let match;
+            
+            while ((match = markdownLinkRegex.exec(line)) !== null) {
+                if (match.index > lastIndex) {
+                    parts.push(line.substring(lastIndex, match.index));
+                }
+                parts.push(
+                    <a 
+                        key={`${lineIndex}-${match.index}`} 
+                        href={match[2]} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        style={{ color: '#3B82F6', textDecoration: 'underline', fontWeight: '600' }}
+                    >
+                        {match[1]}
+                    </a>
+                );
+                lastIndex = markdownLinkRegex.lastIndex;
+            }
+            
+            if (lastIndex < line.length) {
+                parts.push(line.substring(lastIndex));
+            }
+            
+            return (
+                <span key={lineIndex}>
+                    {parts.length > 0 ? parts : line}
+                    {lineIndex < text.split('\n').length - 1 && <br />}
+                </span>
+            );
+        });
+    };
+
     return (
         <>
             {/* Floating Button */}
@@ -123,7 +165,7 @@ const Chatbot = () => {
                     {messages.map(msg => (
                         <div key={msg.id} style={{ alignSelf: msg.sender === 'user' ? 'flex-end' : 'flex-start', maxWidth: '80%' }}>
                             <div style={{ backgroundColor: msg.sender === 'user' ? 'var(--primary, #3B82F6)' : 'white', color: msg.sender === 'user' ? 'white' : '#1e293b', padding: '12px 16px', borderRadius: msg.sender === 'user' ? '16px 16px 4px 16px' : '16px 16px 16px 4px', fontSize: '14px', boxShadow: msg.sender === 'bot' ? '0 2px 4px rgba(0,0,0,0.05)' : 'none', lineHeight: '1.5' }}>
-                                {msg.text}
+                                {renderMessageContent(msg.text)}
                             </div>
                         </div>
                     ))}
