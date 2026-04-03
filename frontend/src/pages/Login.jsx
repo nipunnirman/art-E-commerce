@@ -80,7 +80,7 @@ const Login = () => {
           {/* Logo */}
           <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '28px' }}>
             <div style={{ width: '56px', height: '56px', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 8px 24px rgba(0,0,0,0.5)', overflow: 'hidden' }}>
-              <img src="/logo.png" alt="Through My Pencil Logo" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              <img src="https://image2url.com/r2/default/images/1775202116579-37520a39-51c7-4bcd-b37c-6faf573a82ea.jpeg" alt="Through My Pencil Logo" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             </div>
           </div>
 
