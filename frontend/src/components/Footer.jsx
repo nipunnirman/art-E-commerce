@@ -16,8 +16,8 @@ const Footer = () => (
       <div className="footer-desktop" style={{ padding: 'clamp(40px,8vw,80px) 0 48px', borderBottom: '1px solid rgba(255,255,255,0.07)', display: 'grid', gridTemplateColumns: '2fr 1fr 1fr', gap: '48px' }}>
         <div>
           <Link to="/" className="flex items-center gap-2" style={{ fontFamily: "'Sora',sans-serif", fontWeight: '800', fontSize: '18px', color: 'rgba(255,255,255,0.90)', letterSpacing: '-0.02em', display: 'inline-flex' }}>
-            <div style={{ width: '34px', height: '34px', borderRadius: '10px', background: 'linear-gradient(135deg,#3B82F6,#1D4ED8)', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 16px rgba(59,130,246,0.4)', flexShrink: 0 }}>
-              <Palette size={18} color="white" />
+            <div style={{ width: '38px', height: '38px', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 16px rgba(0,0,0,0.4)', flexShrink: 0, overflow: 'hidden' }}>
+              <img src="/logo.png" alt="Logo" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             </div>
             Through My Pencil
           </Link>
@@ -62,8 +62,8 @@ const Footer = () => (
         {/* Brand row */}
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '28px' }}>
           <Link to="/" className="flex items-center gap-2" style={{ fontFamily: "'Sora',sans-serif", fontWeight: '800', fontSize: '16px', color: 'rgba(255,255,255,0.90)' }}>
-            <div style={{ width: '30px', height: '30px', borderRadius: '8px', background: 'linear-gradient(135deg,#3B82F6,#1D4ED8)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <Palette size={16} color="white" />
+            <div style={{ width: '32px', height: '32px', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
+              <img src="/logo.png" alt="Logo" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             </div>
             Through My Pencil
           </Link>

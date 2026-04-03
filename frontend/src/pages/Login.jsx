@@ -79,8 +79,8 @@ const Login = () => {
 
           {/* Logo */}
           <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '28px' }}>
-            <div style={{ width: '52px', height: '52px', borderRadius: '16px', background: 'linear-gradient(135deg,#3B82F6,#1D4ED8)', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 8px 24px rgba(59,130,246,0.5)' }}>
-              <Palette size={26} color="white" />
+            <div style={{ width: '56px', height: '56px', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 8px 24px rgba(0,0,0,0.5)', overflow: 'hidden' }}>
+              <img src="/logo.png" alt="Through My Pencil Logo" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             </div>
           </div>
 

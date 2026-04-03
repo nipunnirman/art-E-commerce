@@ -47,13 +47,12 @@ const Navbar = () => {
             letterSpacing: '-0.03em', color: 'rgba(255,255,255,0.95)',
           }}>
             <div style={{
-              width: '34px', height: '34px', borderRadius: '10px',
-              background: 'linear-gradient(135deg,#3B82F6,#1D4ED8)',
+              width: '38px', height: '38px', borderRadius: '10px',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
-              boxShadow: '0 4px 16px rgba(59,130,246,0.45)',
-              flexShrink: 0,
+              boxShadow: '0 4px 16px rgba(0,0,0,0.45)',
+              flexShrink: 0, overflow: 'hidden'
             }}>
-              <Palette size={18} color="white" />
+              <img src="/logo.png" alt="Logo" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             </div>
             <span className="nav-logo-text">Through My Pencil</span>
           </Link>
@@ -163,11 +162,11 @@ const Navbar = () => {
             color: 'rgba(255,255,255,0.90)', letterSpacing: '-0.02em',
           }}>
             <div style={{
-              width: '30px', height: '30px', borderRadius: '8px',
-              background: 'linear-gradient(135deg,#3B82F6,#1D4ED8)',
+              width: '32px', height: '32px', borderRadius: '8px',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
+              overflow: 'hidden'
             }}>
-              <Palette size={16} color="white" />
+              <img src="/logo.png" alt="Logo" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             </div>
             Through My Pencil
           </Link>
